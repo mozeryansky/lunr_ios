@@ -21,7 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		4C02DAD91A99FDD600DB4A20 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C02DAD81A99FDD600DB4A20 /* NavigationController.m */; };
+		4C02DAD91A99FDD600DB4A20 /* NavigationTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C02DAD81A99FDD600DB4A20 /* NavigationTabController.m */; };
 		4C25F6681A97198D0029B8B4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C25F6671A97198D0029B8B4 /* LoginViewController.m */; };
 		4C25F66B1A97199F0029B8B4 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C25F66A1A97199F0029B8B4 /* RegisterViewController.m */; };
 		4C25F6711A971AD20029B8B4 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C25F6701A971AD20029B8B4 /* MainViewController.m */; };
@@ -38,6 +38,7 @@
 		4C6E11461AA2F00200C25E40 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6E11441AA2F00200C25E40 /* Event.m */; };
 		4C6E114E1AA2F9B700C25E40 /* _Treat.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6E114B1AA2F9B700C25E40 /* _Treat.m */; };
 		4C6E114F1AA2F9B700C25E40 /* Treat.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6E114D1AA2F9B700C25E40 /* Treat.m */; };
+		4C6E11521AA3344800C25E40 /* EventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6E11511AA3344800C25E40 /* EventViewController.m */; };
 		4CC092AE1AA06A4800F9839D /* EventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CC092AD1AA06A4800F9839D /* EventTableViewCell.xib */; };
 		4CC44EDB1A99BA530074C640 /* UIBarButtonItem+Buttons.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC44EDA1A99BA530074C640 /* UIBarButtonItem+Buttons.m */; };
 		4CC44EDE1A99C1740074C640 /* UIColor+Lunr.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC44EDD1A99C1740074C640 /* UIColor+Lunr.m */; };
@@ -48,6 +49,8 @@
 		4CC780B31A84161E00ED78B8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CC780B21A84161E00ED78B8 /* Images.xcassets */; };
 		4CC780B61A84161E00ED78B8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CC780B41A84161E00ED78B8 /* LaunchScreen.xib */; };
 		4CC780C21A84161E00ED78B8 /* Lunr_iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC780C11A84161E00ED78B8 /* Lunr_iOSTests.m */; };
+		4CE21CAD1AA369A600D37EF2 /* TreatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CE21CAC1AA369A600D37EF2 /* TreatTableViewCell.xib */; };
+		4CE21CB01AA369FC00D37EF2 /* TreatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE21CAF1AA369FC00D37EF2 /* TreatTableViewCell.m */; };
 		F4E3CEB7D224063F2626CE16 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09669DF40223BDA6C5041F0E /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -63,8 +66,8 @@
 
 /* Begin PBXFileReference section */
 		09669DF40223BDA6C5041F0E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		4C02DAD71A99FDD600DB4A20 /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
-		4C02DAD81A99FDD600DB4A20 /* NavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationController.m; sourceTree = "<group>"; };
+		4C02DAD71A99FDD600DB4A20 /* NavigationTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationTabController.h; sourceTree = "<group>"; };
+		4C02DAD81A99FDD600DB4A20 /* NavigationTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationTabController.m; sourceTree = "<group>"; };
 		4C25F6661A97198D0029B8B4 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		4C25F6671A97198D0029B8B4 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		4C25F6691A97199F0029B8B4 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
@@ -97,6 +100,8 @@
 		4C6E114B1AA2F9B700C25E40 /* _Treat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _Treat.m; path = Model/_Treat.m; sourceTree = "<group>"; };
 		4C6E114C1AA2F9B700C25E40 /* Treat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Treat.h; path = Model/Treat.h; sourceTree = "<group>"; };
 		4C6E114D1AA2F9B700C25E40 /* Treat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Treat.m; path = Model/Treat.m; sourceTree = "<group>"; };
+		4C6E11501AA3344800C25E40 /* EventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventViewController.h; sourceTree = "<group>"; };
+		4C6E11511AA3344800C25E40 /* EventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventViewController.m; sourceTree = "<group>"; };
 		4CC092AD1AA06A4800F9839D /* EventTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventTableViewCell.xib; sourceTree = "<group>"; };
 		4CC44ED91A99BA530074C640 /* UIBarButtonItem+Buttons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Buttons.h"; sourceTree = "<group>"; };
 		4CC44EDA1A99BA530074C640 /* UIBarButtonItem+Buttons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Buttons.m"; sourceTree = "<group>"; };
@@ -114,6 +119,9 @@
 		4CC780BB1A84161E00ED78B8 /* Lunr iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lunr iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CC780C01A84161E00ED78B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4CC780C11A84161E00ED78B8 /* Lunr_iOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Lunr_iOSTests.m; sourceTree = "<group>"; };
+		4CE21CAC1AA369A600D37EF2 /* TreatTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TreatTableViewCell.xib; sourceTree = "<group>"; };
+		4CE21CAE1AA369FC00D37EF2 /* TreatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TreatTableViewCell.h; sourceTree = "<group>"; };
+		4CE21CAF1AA369FC00D37EF2 /* TreatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TreatTableViewCell.m; sourceTree = "<group>"; };
 		8402EEFDDEA1676D36E3583B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		AECFD180BBC16EBF2BE677F1 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -141,7 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				4C25F65F1A970A580029B8B4 /* headers */,
-				4C02DAD81A99FDD600DB4A20 /* NavigationController.m */,
+				4C02DAD81A99FDD600DB4A20 /* NavigationTabController.m */,
 				4C25F67C1A971FD50029B8B4 /* TabBarViewController.m */,
 				4C25F6671A97198D0029B8B4 /* LoginViewController.m */,
 				4C25F66A1A97199F0029B8B4 /* RegisterViewController.m */,
@@ -149,6 +157,7 @@
 				4C25F6731A971AF20029B8B4 /* TreatsViewController.m */,
 				4C25F6761A971B010029B8B4 /* SavedViewController.m */,
 				4C25F6791A971B130029B8B4 /* SettingsViewController.m */,
+				4C6E11511AA3344800C25E40 /* EventViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -156,7 +165,8 @@
 		4C25F65F1A970A580029B8B4 /* headers */ = {
 			isa = PBXGroup;
 			children = (
-				4C02DAD71A99FDD600DB4A20 /* NavigationController.h */,
+				4C6E11501AA3344800C25E40 /* EventViewController.h */,
+				4C02DAD71A99FDD600DB4A20 /* NavigationTabController.h */,
 				4C25F67B1A971FD50029B8B4 /* TabBarViewController.h */,
 				4C25F6661A97198D0029B8B4 /* LoginViewController.h */,
 				4C25F6691A97199F0029B8B4 /* RegisterViewController.h */,
@@ -266,6 +276,7 @@
 				4C8EC4101A99B2C4001966DF /* headers */,
 				4C6428C51AA054A800CF941E /* SelectableButton.m */,
 				4C6E11241AA2984500C25E40 /* EventTableViewCell.m */,
+				4CE21CAF1AA369FC00D37EF2 /* TreatTableViewCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -273,6 +284,7 @@
 		4C8EC4101A99B2C4001966DF /* headers */ = {
 			isa = PBXGroup;
 			children = (
+				4CE21CAE1AA369FC00D37EF2 /* TreatTableViewCell.h */,
 				4C6E11231AA2984500C25E40 /* EventTableViewCell.h */,
 				4C6428C41AA054A800CF941E /* SelectableButton.h */,
 			);
@@ -284,6 +296,7 @@
 			children = (
 				4CC780AF1A84161E00ED78B8 /* Main.storyboard */,
 				4CC092AD1AA06A4800F9839D /* EventTableViewCell.xib */,
+				4CE21CAC1AA369A600D37EF2 /* TreatTableViewCell.xib */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -467,6 +480,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CE21CAD1AA369A600D37EF2 /* TreatTableViewCell.xib in Resources */,
 				4CC092AE1AA06A4800F9839D /* EventTableViewCell.xib in Resources */,
 				4CC780B11A84161E00ED78B8 /* Main.storyboard in Resources */,
 				4CC780B61A84161E00ED78B8 /* LaunchScreen.xib in Resources */,
@@ -536,9 +550,10 @@
 			files = (
 				4C25F67D1A971FD50029B8B4 /* TabBarViewController.m in Sources */,
 				4C25F66B1A97199F0029B8B4 /* RegisterViewController.m in Sources */,
+				4CE21CB01AA369FC00D37EF2 /* TreatTableViewCell.m in Sources */,
 				4CC44EDE1A99C1740074C640 /* UIColor+Lunr.m in Sources */,
 				4C6E113B1AA2C5E400C25E40 /* EventsDataSource.m in Sources */,
-				4C02DAD91A99FDD600DB4A20 /* NavigationController.m in Sources */,
+				4C02DAD91A99FDD600DB4A20 /* NavigationTabController.m in Sources */,
 				4C25F6681A97198D0029B8B4 /* LoginViewController.m in Sources */,
 				4C25F6711A971AD20029B8B4 /* MainViewController.m in Sources */,
 				4C25F67A1A971B130029B8B4 /* SettingsViewController.m in Sources */,
@@ -548,6 +563,7 @@
 				4CC44EDB1A99BA530074C640 /* UIBarButtonItem+Buttons.m in Sources */,
 				4C6E114E1AA2F9B700C25E40 /* _Treat.m in Sources */,
 				4C6E11461AA2F00200C25E40 /* Event.m in Sources */,
+				4C6E11521AA3344800C25E40 /* EventViewController.m in Sources */,
 				4CC780A51A84161E00ED78B8 /* AppDelegate.m in Sources */,
 				4C6E11451AA2F00200C25E40 /* _Event.m in Sources */,
 				4CC780A21A84161E00ED78B8 /* main.m in Sources */,
@@ -753,6 +769,7 @@
 				4C6E113F1AA2ED8D00C25E40 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4CC780971A84161D00ED78B8 /* Build configuration list for PBXProject "Lunr iOS" */ = {
 			isa = XCConfigurationList;

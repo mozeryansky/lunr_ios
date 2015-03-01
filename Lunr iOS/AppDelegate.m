@@ -28,7 +28,8 @@
     [[UITabBar appearance] setBarTintColor:[UIColor tabBarBackgroundColor]];
 
     // UINavigationController Appearance
-    [[UINavigationBar appearance] setBackgroundColor:[UIColor lunrPurple]];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor lunrPurple]];
 
     return YES;
 }

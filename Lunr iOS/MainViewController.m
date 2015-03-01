@@ -86,6 +86,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+
+    [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
 }
 
 #pragma mark - Properties
@@ -129,6 +131,13 @@
     EventTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
     return cell;
+}
+
+#pragma mark - Table View Delegate
+
+- (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
+{
+    [self performSegueWithIdentifier:@"showEventSegue" sender:self];
 }
 
 #pragma mark - Segues

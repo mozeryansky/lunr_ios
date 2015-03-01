@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NavigationController : UINavigationController
+@interface NavigationTabController : UINavigationController <UINavigationControllerDelegate>
 
 @end

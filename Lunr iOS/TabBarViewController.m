@@ -20,6 +20,9 @@
 {
     [super viewDidLoad];
 
+    // setup tab bar
+    self.delegate = self;
+
     // set tab font size
     [self setupTabFont];
 }
@@ -43,6 +46,15 @@
     [super viewDidAppear:animated];
 
     //[self performSegueWithIdentifier:@"presentLoginSegue" sender:self];
+}
+
+#pragma mark - UITabBarControllerDelegate
+
+- (void)tabBarController:(UITabBarController*)tabBarController didSelectViewController:(UIViewController*)viewController
+{
+    if ([viewController isKindOfClass:[UINavigationController class]]) {
+        [(UINavigationController*)viewController popToRootViewControllerAnimated:NO];
+    }
 }
 
 @end
