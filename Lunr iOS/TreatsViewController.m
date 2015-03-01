@@ -1,18 +1,18 @@
 //
-//  MainTableViewController.m
+//  TreatsViewController.m
 //  Lunr iOS
 //
 //  Created by Michael Ozeryansky on 2/20/15.
 //  Copyright (c) 2015 Lunr. All rights reserved.
 //
 
-#import "MainTableViewController.h"
+#import "TreatsViewController.h"
 
-@interface MainTableViewController ()
+@interface TreatsViewController ()
 
 @end
 
-@implementation MainTableViewController
+@implementation TreatsViewController
 
 - (void)viewDidLoad
 {

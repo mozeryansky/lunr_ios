@@ -1,5 +1,5 @@
 //
-//  TreatsTableViewController.h
+//  SavedViewController.h
 //  Lunr iOS
 //
 //  Created by Michael Ozeryansky on 2/20/15.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TreatsTableViewController : UITableViewController
+@interface SavedViewController : UIViewController
 
 @end

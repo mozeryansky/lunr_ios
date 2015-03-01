@@ -8,6 +8,8 @@
 
 #import "TabBarViewController.h"
 
+#import "UIColor+Lunr.h"
+
 @interface TabBarViewController ()
 
 @end
@@ -17,6 +19,30 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    // set tab font size
+    [self setupTabFont];
+}
+
+- (void)setupTabFont
+{
+    for (UIViewController* tab in self.viewControllers) {
+        [tab.tabBarItem setTitleTextAttributes:@{
+            NSFontAttributeName : [UIFont boldSystemFontOfSize:12]
+        } forState:UIControlStateNormal];
+    }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
+    //[self performSegueWithIdentifier:@"presentLoginSegue" sender:self];
 }
 
 @end
