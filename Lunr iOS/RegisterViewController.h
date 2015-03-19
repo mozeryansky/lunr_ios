@@ -10,4 +10,17 @@
 
 @interface RegisterViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UITextField* emailTextField;
+@property (weak, nonatomic) IBOutlet UITextField* nameTextField;
+@property (weak, nonatomic) IBOutlet UITextField* passwordTextField;
+@property (weak, nonatomic) IBOutlet UITextField* passwordConfirmationTextField;
+@property (weak, nonatomic) IBOutlet UIButton* registerButton;
+@property (weak, nonatomic) IBOutlet UIButton* signInButton;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView* activityIndicator;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint* lunrLogoWidthContraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint* lunrLogoHeightContraint;
+
+- (IBAction)registerButtonPressed:(id)sender;
+
 @end

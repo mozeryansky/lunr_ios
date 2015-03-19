@@ -29,6 +29,11 @@
 		4C25F6771A971B010029B8B4 /* SavedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C25F6761A971B010029B8B4 /* SavedViewController.m */; };
 		4C25F67A1A971B130029B8B4 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C25F6791A971B130029B8B4 /* SettingsViewController.m */; };
 		4C25F67D1A971FD50029B8B4 /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C25F67C1A971FD50029B8B4 /* TabBarViewController.m */; };
+		4C49AEAA1ABA416900A89FB6 /* UIViewController+Alerts.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C49AEA91ABA416900A89FB6 /* UIViewController+Alerts.m */; };
+		4C49AEAD1ABA435B00A89FB6 /* NSError+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C49AEAC1ABA435B00A89FB6 /* NSError+Extensions.m */; };
+		4C49AEB01ABA48D300A89FB6 /* UIViewController+FormValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C49AEAF1ABA48D300A89FB6 /* UIViewController+FormValidation.m */; };
+		4C49AEB31ABA50FB00A89FB6 /* UITextField+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C49AEB21ABA50FB00A89FB6 /* UITextField+Validation.m */; };
+		4C5105501AACDA140054FD12 /* UserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C51054F1AACDA140054FD12 /* UserDefaults.m */; };
 		4C6428C61AA054A800CF941E /* SelectableButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6428C51AA054A800CF941E /* SelectableButton.m */; };
 		4C6E11251AA2984500C25E40 /* EventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6E11241AA2984500C25E40 /* EventTableViewCell.m */; };
 		4C6E112F1AA2A6A200C25E40 /* LunrAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6E112E1AA2A6A200C25E40 /* LunrAPI.m */; };
@@ -51,6 +56,7 @@
 		4CC780C21A84161E00ED78B8 /* Lunr_iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC780C11A84161E00ED78B8 /* Lunr_iOSTests.m */; };
 		4CE21CAD1AA369A600D37EF2 /* TreatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CE21CAC1AA369A600D37EF2 /* TreatTableViewCell.xib */; };
 		4CE21CB01AA369FC00D37EF2 /* TreatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE21CAF1AA369FC00D37EF2 /* TreatTableViewCell.m */; };
+		4CFF5CB41AA865260040C1D4 /* TreatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFF5CB31AA865260040C1D4 /* TreatViewController.m */; };
 		F4E3CEB7D224063F2626CE16 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09669DF40223BDA6C5041F0E /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -82,6 +88,16 @@
 		4C25F6791A971B130029B8B4 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		4C25F67B1A971FD50029B8B4 /* TabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarViewController.h; sourceTree = "<group>"; };
 		4C25F67C1A971FD50029B8B4 /* TabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarViewController.m; sourceTree = "<group>"; };
+		4C49AEA81ABA416900A89FB6 /* UIViewController+Alerts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Alerts.h"; sourceTree = "<group>"; };
+		4C49AEA91ABA416900A89FB6 /* UIViewController+Alerts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Alerts.m"; sourceTree = "<group>"; };
+		4C49AEAB1ABA435B00A89FB6 /* NSError+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+Extensions.h"; sourceTree = "<group>"; };
+		4C49AEAC1ABA435B00A89FB6 /* NSError+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+Extensions.m"; sourceTree = "<group>"; };
+		4C49AEAE1ABA48D300A89FB6 /* UIViewController+FormValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+FormValidation.h"; sourceTree = "<group>"; };
+		4C49AEAF1ABA48D300A89FB6 /* UIViewController+FormValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+FormValidation.m"; sourceTree = "<group>"; };
+		4C49AEB11ABA50FB00A89FB6 /* UITextField+Validation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Validation.h"; sourceTree = "<group>"; };
+		4C49AEB21ABA50FB00A89FB6 /* UITextField+Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Validation.m"; sourceTree = "<group>"; };
+		4C51054F1AACDA140054FD12 /* UserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefaults.m; sourceTree = "<group>"; };
+		4C5105511AACDA4E0054FD12 /* UserDefaults.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserDefaults.h; sourceTree = "<group>"; };
 		4C6428C41AA054A800CF941E /* SelectableButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectableButton.h; sourceTree = "<group>"; };
 		4C6428C51AA054A800CF941E /* SelectableButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectableButton.m; sourceTree = "<group>"; };
 		4C6E11231AA2984500C25E40 /* EventTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventTableViewCell.h; sourceTree = "<group>"; };
@@ -122,6 +138,8 @@
 		4CE21CAC1AA369A600D37EF2 /* TreatTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TreatTableViewCell.xib; sourceTree = "<group>"; };
 		4CE21CAE1AA369FC00D37EF2 /* TreatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TreatTableViewCell.h; sourceTree = "<group>"; };
 		4CE21CAF1AA369FC00D37EF2 /* TreatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TreatTableViewCell.m; sourceTree = "<group>"; };
+		4CFF5CB21AA865260040C1D4 /* TreatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TreatViewController.h; sourceTree = "<group>"; };
+		4CFF5CB31AA865260040C1D4 /* TreatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TreatViewController.m; sourceTree = "<group>"; };
 		8402EEFDDEA1676D36E3583B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		AECFD180BBC16EBF2BE677F1 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -158,6 +176,7 @@
 				4C25F6761A971B010029B8B4 /* SavedViewController.m */,
 				4C25F6791A971B130029B8B4 /* SettingsViewController.m */,
 				4C6E11511AA3344800C25E40 /* EventViewController.m */,
+				4CFF5CB31AA865260040C1D4 /* TreatViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -165,6 +184,7 @@
 		4C25F65F1A970A580029B8B4 /* headers */ = {
 			isa = PBXGroup;
 			children = (
+				4CFF5CB21AA865260040C1D4 /* TreatViewController.h */,
 				4C6E11501AA3344800C25E40 /* EventViewController.h */,
 				4C02DAD71A99FDD600DB4A20 /* NavigationTabController.h */,
 				4C25F67B1A971FD50029B8B4 /* TabBarViewController.h */,
@@ -195,8 +215,21 @@
 				4CC44ED81A99BA460074C640 /* headers */,
 				4CC44EDD1A99C1740074C640 /* UIColor+Lunr.m */,
 				4CC44EDA1A99BA530074C640 /* UIBarButtonItem+Buttons.m */,
+				4C49AEA91ABA416900A89FB6 /* UIViewController+Alerts.m */,
+				4C49AEAC1ABA435B00A89FB6 /* NSError+Extensions.m */,
+				4C49AEAF1ABA48D300A89FB6 /* UIViewController+FormValidation.m */,
+				4C49AEB21ABA50FB00A89FB6 /* UITextField+Validation.m */,
 			);
 			name = Categories;
+			sourceTree = "<group>";
+		};
+		4C51054C1AACD9010054FD12 /* headers */ = {
+			isa = PBXGroup;
+			children = (
+				4CC780A31A84161E00ED78B8 /* AppDelegate.h */,
+				4C5105511AACDA4E0054FD12 /* UserDefaults.h */,
+			);
+			name = headers;
 			sourceTree = "<group>";
 		};
 		4C6E11261AA2A01D00C25E40 /* Data Sources */ = {
@@ -304,6 +337,10 @@
 		4CC44ED81A99BA460074C640 /* headers */ = {
 			isa = PBXGroup;
 			children = (
+				4C49AEB11ABA50FB00A89FB6 /* UITextField+Validation.h */,
+				4C49AEAE1ABA48D300A89FB6 /* UIViewController+FormValidation.h */,
+				4C49AEAB1ABA435B00A89FB6 /* NSError+Extensions.h */,
+				4C49AEA81ABA416900A89FB6 /* UIViewController+Alerts.h */,
 				4CC44EDC1A99C1740074C640 /* UIColor+Lunr.h */,
 				4CC44ED91A99BA530074C640 /* UIBarButtonItem+Buttons.h */,
 			);
@@ -333,8 +370,9 @@
 		4CC7809E1A84161D00ED78B8 /* Lunr iOS */ = {
 			isa = PBXGroup;
 			children = (
-				4CC780A31A84161E00ED78B8 /* AppDelegate.h */,
+				4C51054C1AACD9010054FD12 /* headers */,
 				4CC780A41A84161E00ED78B8 /* AppDelegate.m */,
+				4C51054F1AACDA140054FD12 /* UserDefaults.m */,
 				4CC780A61A84161E00ED78B8 /* Lunr_iOS.xcdatamodeld */,
 				4CC092AC1AA069DB00F9839D /* Storyboards */,
 				4C25F65E1A970A230029B8B4 /* View Controllers */,
@@ -549,11 +587,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C25F67D1A971FD50029B8B4 /* TabBarViewController.m in Sources */,
+				4C49AEAD1ABA435B00A89FB6 /* NSError+Extensions.m in Sources */,
 				4C25F66B1A97199F0029B8B4 /* RegisterViewController.m in Sources */,
 				4CE21CB01AA369FC00D37EF2 /* TreatTableViewCell.m in Sources */,
 				4CC44EDE1A99C1740074C640 /* UIColor+Lunr.m in Sources */,
 				4C6E113B1AA2C5E400C25E40 /* EventsDataSource.m in Sources */,
 				4C02DAD91A99FDD600DB4A20 /* NavigationTabController.m in Sources */,
+				4C49AEAA1ABA416900A89FB6 /* UIViewController+Alerts.m in Sources */,
 				4C25F6681A97198D0029B8B4 /* LoginViewController.m in Sources */,
 				4C25F6711A971AD20029B8B4 /* MainViewController.m in Sources */,
 				4C25F67A1A971B130029B8B4 /* SettingsViewController.m in Sources */,
@@ -562,6 +602,7 @@
 				4CC780A81A84161E00ED78B8 /* Lunr_iOS.xcdatamodeld in Sources */,
 				4CC44EDB1A99BA530074C640 /* UIBarButtonItem+Buttons.m in Sources */,
 				4C6E114E1AA2F9B700C25E40 /* _Treat.m in Sources */,
+				4C49AEB01ABA48D300A89FB6 /* UIViewController+FormValidation.m in Sources */,
 				4C6E11461AA2F00200C25E40 /* Event.m in Sources */,
 				4C6E11521AA3344800C25E40 /* EventViewController.m in Sources */,
 				4CC780A51A84161E00ED78B8 /* AppDelegate.m in Sources */,
@@ -570,8 +611,11 @@
 				4C25F6771A971B010029B8B4 /* SavedViewController.m in Sources */,
 				4C6E114F1AA2F9B700C25E40 /* Treat.m in Sources */,
 				4C6428C61AA054A800CF941E /* SelectableButton.m in Sources */,
+				4C5105501AACDA140054FD12 /* UserDefaults.m in Sources */,
+				4C49AEB31ABA50FB00A89FB6 /* UITextField+Validation.m in Sources */,
 				4C6E11251AA2984500C25E40 /* EventTableViewCell.m in Sources */,
 				4C6E112F1AA2A6A200C25E40 /* LunrAPI.m in Sources */,
+				4CFF5CB41AA865260040C1D4 /* TreatViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

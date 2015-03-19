@@ -9,9 +9,10 @@
 #import "TabBarViewController.h"
 
 #import "UIColor+Lunr.h"
+#import "LunrAPI.h"
 
 @interface TabBarViewController ()
-
+@property (weak, nonatomic) UIPopoverController* popover;
 @end
 
 @implementation TabBarViewController
@@ -45,7 +46,14 @@
 {
     [super viewDidAppear:animated];
 
-    //[self performSegueWithIdentifier:@"presentLoginSegue" sender:self];
+    // verify token
+    [[LunrAPI sharedInstance] verifyTokenSuccess:^{
+        // do nothing, continue
+
+    } failure:^(NSError* error) {
+        // goto login view
+        [self performSegueWithIdentifier:@"presentLoginSegue" sender:self];
+    }];
 }
 
 #pragma mark - UITabBarControllerDelegate
@@ -56,5 +64,15 @@
         [(UINavigationController*)viewController popToRootViewControllerAnimated:NO];
     }
 }
+
+#pragma mark - Segues
+/*
+- (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"presentLoginSegue"]) {
+        //
+    }
+}
+*/
 
 @end

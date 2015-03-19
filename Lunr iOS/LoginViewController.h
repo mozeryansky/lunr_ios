@@ -10,6 +10,15 @@
 
 @interface LoginViewController : UIViewController
 
-- (IBAction)unwindToLoginViewController:(UIStoryboardSegue *)unwindSegue;
+@property (weak, nonatomic) IBOutlet UITextField* emailTextField;
+@property (weak, nonatomic) IBOutlet UITextField* passwordTextField;
+@property (weak, nonatomic) IBOutlet UIButton* logInButton;
+@property (weak, nonatomic) IBOutlet UIButton* signUpButton;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView* activityIndicator;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint* lunrLogoHeightContraint;
+
+- (IBAction)loginButtonPressed:(id)sender;
+
+- (IBAction)unwindToLoginViewController:(UIStoryboardSegue*)unwindSegue;
 
 @end

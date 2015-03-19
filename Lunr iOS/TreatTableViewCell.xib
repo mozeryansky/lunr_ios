@@ -39,7 +39,7 @@
                                     <constraint firstAttribute="width" constant="16" id="odj-ZR-r3B"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" misplaced="YES" text="0.0 miles" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="kQW-1h-V4d">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="0.0 miles" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="kQW-1h-V4d">
                                 <rect key="frame" x="140" y="110" width="156" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -52,7 +52,7 @@
                                     <constraint firstAttribute="height" constant="16" id="xia-2O-b0r"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" misplaced="YES" text="Today | 5:00 PM - 7:00 PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="AYh-ad-R8I">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Today | 5:00 PM - 7:00 PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="AYh-ad-R8I">
                                 <rect key="frame" x="140" y="89" width="156" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -99,6 +99,7 @@
                             <constraint firstItem="krM-wO-eZ8" firstAttribute="top" secondItem="JtC-Iu-HU7" secondAttribute="top" constant="8" id="O59-ZC-27G"/>
                             <constraint firstItem="hms-Dt-rih" firstAttribute="leading" secondItem="24b-Y5-ere" secondAttribute="leading" id="OI1-O7-6k4"/>
                             <constraint firstAttribute="trailing" secondItem="b4i-H0-Ugu" secondAttribute="trailing" constant="8" id="WgS-zO-8xI"/>
+                            <constraint firstItem="AYh-ad-R8I" firstAttribute="leading" secondItem="b4i-H0-Ugu" secondAttribute="leading" id="XVB-mX-985"/>
                             <constraint firstAttribute="trailing" secondItem="hms-Dt-rih" secondAttribute="trailing" constant="8" id="Zbq-jz-nEw"/>
                             <constraint firstItem="24b-Y5-ere" firstAttribute="leading" secondItem="Bml-Dz-Jkn" secondAttribute="leading" id="ZnW-wt-YC9"/>
                             <constraint firstAttribute="trailing" secondItem="kQW-1h-V4d" secondAttribute="trailing" constant="8" id="cxu-xX-WQk"/>
@@ -106,6 +107,7 @@
                             <constraint firstItem="AYh-ad-R8I" firstAttribute="centerY" secondItem="Bml-Dz-Jkn" secondAttribute="centerY" id="gIT-pa-Kcl"/>
                             <constraint firstAttribute="trailing" secondItem="AYh-ad-R8I" secondAttribute="trailing" constant="8" id="h3F-BB-8MN"/>
                             <constraint firstItem="24b-Y5-ere" firstAttribute="leading" secondItem="TLT-Mw-Xl4" secondAttribute="leading" id="hXb-8T-5Bk"/>
+                            <constraint firstItem="kQW-1h-V4d" firstAttribute="leading" secondItem="AYh-ad-R8I" secondAttribute="leading" id="q8A-e1-z8Z"/>
                             <constraint firstItem="24b-Y5-ere" firstAttribute="leading" secondItem="0Iv-NH-9OT" secondAttribute="leading" id="sce-bg-0E3"/>
                             <constraint firstAttribute="trailing" secondItem="0Iv-NH-9OT" secondAttribute="trailing" constant="8" id="x2O-RG-wXP"/>
                             <constraint firstItem="24b-Y5-ere" firstAttribute="top" secondItem="Bml-Dz-Jkn" secondAttribute="bottom" constant="5" id="yN7-jB-VRV"/>

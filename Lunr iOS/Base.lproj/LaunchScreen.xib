@@ -29,6 +29,6 @@
         </view>
     </objects>
     <resources>
-        <image name="splash_screen" width="480" height="803"/>
+        <image name="splash_screen" width="240" height="402"/>
     </resources>
 </document>

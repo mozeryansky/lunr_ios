@@ -10,6 +10,6 @@
 
 @interface SelectableButton : UIButton
 
-@property (nonatomic, getter=isMomentary) IBInspectable BOOL momentary;
+@property (nonatomic) IBInspectable BOOL holdHighlight;
 
 @end

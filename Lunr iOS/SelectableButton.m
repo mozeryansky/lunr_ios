@@ -31,27 +31,24 @@
 
 - (void)awakeFromNib
 {
-    // if button is set to be momentary
-    if (self.isMomentary) {
-        // change highlight on press
-        [self addTarget:self action:@selector(buttonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+    [self addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
 
-    } else {
-        // highlight only on hold
-        [self addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
+    if (!self.holdHighlight) {
         [self addTarget:self action:@selector(buttonTouchUp:) forControlEvents:UIControlEventTouchUpInside];
         [self addTarget:self action:@selector(buttonTouchUp:) forControlEvents:UIControlEventTouchUpOutside];
     }
 }
 
-#pragma mark - Actions
-
-- (void)buttonTouchUpInside:(id)sender
+- (void)setSelected:(BOOL)selected
 {
-    self.selected = !self.selected;
+    [super setSelected:selected];
 
-    [self setSelectedBackgroundColor:[self isSelected]];
+    if(self.holdHighlight){
+        [self setSelectedBackgroundColor:[self isSelected]];
+    }
 }
+
+#pragma mark - Actions
 
 - (void)buttonTouchDown:(id)sender
 {

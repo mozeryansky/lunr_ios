@@ -1,18 +1,14 @@
 //
-//  EventViewController.m
+//  TreatViewController.m
 //  Lunr iOS
 //
-//  Created by Michael Ozeryansky on 3/1/15.
+//  Created by Michael Ozeryansky on 3/5/15.
 //  Copyright (c) 2015 Lunr. All rights reserved.
 //
 
-#import "EventViewController.h"
+#import "TreatViewController.h"
 
-@interface EventViewController ()
-
-@end
-
-@implementation EventViewController
+@implementation TreatViewController
 
 - (void)viewDidLoad
 {
@@ -23,9 +19,7 @@
     [self.scrollView setDecelerationRate:UIScrollViewDecelerationRateFast];
 }
 
-#pragma mark - Actions
-
-- (IBAction)saveEventButtonPressed:(id)sender
+- (IBAction)getTicketButtonPressed:(id)sender
 {
 }
 

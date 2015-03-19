@@ -13,9 +13,14 @@
 #import "UIBarButtonItem+Buttons.h"
 #import "UIColor+Lunr.h"
 
+typedef NS_ENUM(NSInteger, ToolbarMoveDirection) {
+    ToolbarMoveDirectionDown = 1,
+    ToolbarMoveDirectionUp = -1
+};
+
 @interface MainViewController ()
 @property (nonatomic) UIBarButtonItem* selectedEventTypeButton;
-@property (nonatomic, getter=isHidden) BOOL toolbarHidden;
+@property (nonatomic, getter=isToolbarHidden) BOOL toolbarHidden;
 @property (nonatomic) dispatch_queue_t toolbarQueue;
 @property (nonatomic) CGPoint previousScrollTranslation;
 @end
@@ -157,10 +162,10 @@
 
     // determine direction
     if (velocity.y > 0) {
-        [self hideToolbar];
+        [self showToolbar];
 
     } else if (velocity.y < 0) {
-        [self showToolbar];
+        [self hideToolbar];
     }
 }
 
@@ -183,7 +188,7 @@
         hidding = YES;
 
         // move the tab bar and attached view in a positive/down direction
-        [self moveToolbarInDirection:1 completion:^(BOOL finished) {
+        [self moveToolbarInDirection:ToolbarMoveDirectionDown completion:^(BOOL finished) {
             self.toolbarHidden = YES;
             hidding = NO;
         }];
@@ -202,14 +207,14 @@
         showing = YES;
 
         // move the tab bar and attached view in a positive/down direction
-        [self moveToolbarInDirection:-1 completion:^(BOOL finished) {
+        [self moveToolbarInDirection:ToolbarMoveDirectionUp completion:^(BOOL finished) {
             self.toolbarHidden = NO;
             showing = NO;
         }];
     });
 }
 
-- (void)moveToolbarInDirection:(NSInteger)direction completion:(void (^)(BOOL finished))completion
+- (void)moveToolbarInDirection:(ToolbarMoveDirection)direction completion:(void (^)(BOOL finished))completion
 {
     // move views
     [UIView animateWithDuration:0.4 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{

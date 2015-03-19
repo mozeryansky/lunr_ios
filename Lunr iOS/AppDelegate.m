@@ -8,7 +8,10 @@
 
 #import "AppDelegate.h"
 
+#import "AFNetworkActivityLogger.h"
 #import "UIColor+Lunr.h"
+#import "UserDefaults.h"
+#import "LunrAPI.h"
 
 @interface AppDelegate ()
 
@@ -18,7 +21,10 @@
 
 - (BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
 {
-    // Override point for customization after application launch.
+    // AFNetworking Logging
+    [[AFNetworkActivityLogger sharedLogger] startLogging];
+
+    // Appearance
 
     // set default bar button tint
     [[UIBarButtonItem appearance] setTintColor:[UIColor eventTypeNormalColor]];
@@ -30,6 +36,9 @@
     // UINavigationController Appearance
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setBarTintColor:[UIColor lunrPurple]];
+
+    // user defaults
+    [self registerDefaults];
 
     return YES;
 }
@@ -60,6 +69,26 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
+}
+
+#pragma mark - User Defaults
+
+- (void)registerDefaults
+{
+    NSDictionary* defaults = @{
+        // Search Within
+        UserDefaultsSearchWithinKey : @50,
+        // When
+        UserDefaultsWhenKey : @(UserDefaultsWhenWeekend),
+        // Show Me
+        UserDefaultsShowMeConcertsAndFestivalsKey : @YES,
+        UserDefaultsShowMeFoodAndDrinksKey : @YES,
+        UserDefaultsShowMeNightlifeKey : @YES,
+        // Login
+        UserDefaultsRememberTokenKey : @""
+    };
+
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
 }
 
 @end
