@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 
+#import "CoreData+MagicalRecord.h"
 #import "AFNetworkActivityLogger.h"
 #import "UIColor+Lunr.h"
 #import "UserDefaults.h"
@@ -21,8 +22,12 @@
 
 - (BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
 {
+    //Setup MagicalRecord
+    [MagicalRecord setupCoreDataStackWithStoreNamed:@"lunr"];
+
     // AFNetworking Logging
     [[AFNetworkActivityLogger sharedLogger] startLogging];
+    //[[AFNetworkActivityLogger sharedLogger] setLevel:AFLoggerLevelDebug];
 
     // Appearance
 

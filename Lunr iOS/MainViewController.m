@@ -12,6 +12,8 @@
 #import "EventTableViewCell.h"
 #import "UIBarButtonItem+Buttons.h"
 #import "UIColor+Lunr.h"
+#import "EventsDataSource.h"
+#import "LunrAPI.h"
 
 typedef NS_ENUM(NSInteger, ToolbarMoveDirection) {
     ToolbarMoveDirectionDown = 1,
@@ -19,7 +21,8 @@ typedef NS_ENUM(NSInteger, ToolbarMoveDirection) {
 };
 
 @interface MainViewController ()
-@property (nonatomic) UIBarButtonItem* selectedEventTypeButton;
+@property (strong, nonatomic) EventsDataSource* eventsDataSource;
+@property (strong, nonatomic) UIBarButtonItem* selectedEventTypeButton;
 @property (nonatomic, getter=isToolbarHidden) BOOL toolbarHidden;
 @property (nonatomic) dispatch_queue_t toolbarQueue;
 @property (nonatomic) CGPoint previousScrollTranslation;
@@ -75,11 +78,11 @@ typedef NS_ENUM(NSInteger, ToolbarMoveDirection) {
     self.tableView.delegate = self;
 
     // data source
-    self.tableView.dataSource = self;
+    self.eventsDataSource = [[EventsDataSource alloc] initWithTableView:self.tableView cellIdentifier:[EventTableViewCell cellIdentifer]];
+    self.tableView.dataSource = self.eventsDataSource;
 
     // register cell from xib
-    static NSString* CellIdentifier = @"EventTableViewCell";
-    [self.tableView registerNib:[UINib nibWithNibName:CellIdentifier bundle:[NSBundle mainBundle]] forCellReuseIdentifier:CellIdentifier];
+    [self.tableView registerNib:[UINib nibWithNibName:[EventTableViewCell cellIdentifer] bundle:[NSBundle mainBundle]] forCellReuseIdentifier:[EventTableViewCell cellIdentifer]];
 
     // set content inset to acount for the toolbar
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, CGRectGetHeight(self.toolbar.frame), 0);
@@ -92,7 +95,11 @@ typedef NS_ENUM(NSInteger, ToolbarMoveDirection) {
 {
     [super viewWillAppear:animated];
 
+    // deselect any selected rows
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
+
+    // fetch data
+    [[LunrAPI sharedInstance] retrieveEvents];
 }
 
 #pragma mark - Properties
@@ -114,28 +121,6 @@ typedef NS_ENUM(NSInteger, ToolbarMoveDirection) {
 - (void)beginSearch
 {
     // set focus on search controller
-}
-
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView
-{
-    // Return the number of sections.
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
-    return 5;
-}
-
-- (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
-{
-    static NSString* CellIdentifier = @"EventTableViewCell";
-    EventTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-
-    return cell;
 }
 
 #pragma mark - Table View Delegate

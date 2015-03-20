@@ -25,6 +25,7 @@ extern NSString* const kLunrAPICheckURL;
 - (void)verifyTokenSuccess:(void (^)())success failure:(void (^)(NSError* error))failure;
 - (void)logout;
 
-- (NSArray*)allEventIDs;
+- (void)retrieveEvents;
+- (void)retrieveTreats;
 
 @end

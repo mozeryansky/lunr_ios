@@ -20,6 +20,13 @@
     self.borderView.layer.cornerRadius = 2.0;
 }
 
++ (NSString*)cellIdentifer
+{
+    static NSString* CellIdentifier = @"TreatTableViewCell";
+
+    return CellIdentifier;
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];

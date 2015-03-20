@@ -8,10 +8,13 @@
 
 #import "TreatsViewController.h"
 
-#import "EventTableViewCell.h"
+#import "TreatTableViewCell.h"
+#import "TreatsDataSource.h"
+#import "LunrAPI.h"
 
 @interface TreatsViewController ()
 
+@property (strong, nonatomic) TreatsDataSource* treatsDataSource;
 @end
 
 @implementation TreatsViewController
@@ -29,40 +32,22 @@
     self.tableView.delegate = self;
 
     // data source
-    self.tableView.dataSource = self;
+    self.treatsDataSource = [[TreatsDataSource alloc] initWithTableView:self.tableView cellIdentifier:[TreatTableViewCell cellIdentifer]];
+    self.tableView.dataSource = self.treatsDataSource;
 
     // register cell from xib
-    static NSString* CellIdentifier = @"TreatTableViewCell";
-    [self.tableView registerNib:[UINib nibWithNibName:CellIdentifier bundle:[NSBundle mainBundle]] forCellReuseIdentifier:CellIdentifier];
+    [self.tableView registerNib:[UINib nibWithNibName:[TreatTableViewCell cellIdentifer] bundle:[NSBundle mainBundle]] forCellReuseIdentifier:[TreatTableViewCell cellIdentifer]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
 
+    // deselect any selected rows
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
-}
 
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView
-{
-    // Return the number of sections.
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
-    return 5;
-}
-
-- (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
-{
-    static NSString* CellIdentifier = @"TreatTableViewCell";
-    EventTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-
-    return cell;
+    // fetch data
+    [[LunrAPI sharedInstance] retrieveTreats];
 }
 
 #pragma mark - Table View Delegate

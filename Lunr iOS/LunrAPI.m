@@ -8,9 +8,12 @@
 
 #import "LunrAPI.h"
 
+#import "CoreData+MagicalRecord.h"
 #import "UserDefaults.h"
 #import "AFNetworking.h"
 #import "NSError+Extensions.h"
+#import "Event.h"
+#import "Treat.h"
 
 #define CREATE_FAILURE_BLOCK(blockName, method)                                                                                                        \
     void (^blockName)(AFHTTPRequestOperation * operation, NSError * error) = ^(AFHTTPRequestOperation * operation, NSError * error) { \
@@ -36,6 +39,10 @@ NSString* const kLunrAPILoginURL = @"https://lunr.herokuapp.com/login.json";
 NSString* const kLunrAPIRegisterURL = @"https://lunr.herokuapp.com/register";
 NSString* const kLunrAPICheckSpecialURL = @"https://www.lunr.me/check_special.json";
 
+@interface LunrAPI ()
+@property (strong, nonatomic) AFHTTPRequestOperationManager* manager;
+@end
+
 @implementation LunrAPI
 
 + (instancetype)sharedInstance
@@ -48,6 +55,36 @@ NSString* const kLunrAPICheckSpecialURL = @"https://www.lunr.me/check_special.js
     });
 
     return _sharedInstance;
+}
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        [self setupManager];
+    }
+
+    return self;
+}
+
+- (void)setupManager
+{
+    // JSON serializer manager
+    AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+
+    // accept json during the request
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+
+    // add text/html
+    /*
+    NSMutableSet* set = [NSMutableSet setWithSet:manager.responseSerializer.acceptableContentTypes];
+    [set addObject:@"text/html"];
+    manager.responseSerializer.acceptableContentTypes = set;
+     */
+
+    self.manager = manager;
 }
 
 #pragma mark - Authentication
@@ -82,10 +119,7 @@ NSString* const kLunrAPICheckSpecialURL = @"https://www.lunr.me/check_special.js
     });
 
     // check if the token is valid
-    AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    [manager POST:kLunrAPILoginURL parameters:params success:successBlock failure:failureBlock];
+    [self.manager POST:kLunrAPILoginURL parameters:params success:successBlock failure:failureBlock];
 }
 
 - (void)registerWithEmail:(NSString*)email name:(NSString*)name password:(NSString*)password success:(void (^)())success failure:(void (^)(NSError* error))failure
@@ -102,6 +136,16 @@ NSString* const kLunrAPICheckSpecialURL = @"https://www.lunr.me/check_special.js
 
     // create failure block
     CREATE_FAILURE_BLOCK(failureBlock, {
+        // get the error from the response
+        NSDictionary *responseObject = [self responseObjectForError:error];
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            // if there's an info key
+            NSString *description = responseObject[@"info"][0];
+            if(description){
+                error = [NSError errorWithDescription:description];
+            }
+        }
+
         // call block
         if (failure) {
             failure(error);
@@ -120,10 +164,7 @@ NSString* const kLunrAPICheckSpecialURL = @"https://www.lunr.me/check_special.js
     });
 
     // check if the token is valid
-    AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    [manager POST:kLunrAPIRegisterURL parameters:params success:successBlock failure:failureBlock];
+    [self.manager POST:kLunrAPIRegisterURL parameters:params success:successBlock failure:failureBlock];
 }
 
 - (void)verifyTokenSuccess:(void (^)())success failure:(void (^)(NSError* error))failure
@@ -163,9 +204,7 @@ NSString* const kLunrAPICheckSpecialURL = @"https://www.lunr.me/check_special.js
     });
 
     // check if the token is valid
-    AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [manager GET:kLunrAPICheckURL parameters:params success:successBlock failure:failureBlock];
+    [self.manager GET:kLunrAPICheckURL parameters:params success:successBlock failure:failureBlock];
 }
 
 - (void)logout
@@ -174,13 +213,73 @@ NSString* const kLunrAPICheckSpecialURL = @"https://www.lunr.me/check_special.js
     [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:UserDefaultsRememberTokenKey];
 }
 
-#pragma mark - API
+#pragma mark - Events
 
-- (NSArray*)allEventIDs
+- (void)retrieveEvents
 {
-    NSMutableArray* eventIDs = [[NSMutableArray alloc] init];
+    [self getEventsSuccess:^{
 
-    return [eventIDs copy];
+    } failure:^(NSError* error){
+
+    }];
+
+    [MagicalRecord saveWithBlock:^(NSManagedObjectContext* localContext) {
+        //
+        [Event MR_truncateAllInContext:localContext];
+
+    } completion:^(BOOL success, NSError* error){
+
+    }];
+}
+
+- (void)getEventsSuccess:(void (^)())success failure:(void (^)(NSError* error))failure
+{
+    NSString* token = [[NSUserDefaults standardUserDefaults] stringForKey:UserDefaultsRememberTokenKey];
+    BOOL concerts_festivals = [[NSUserDefaults standardUserDefaults] boolForKey:UserDefaultsShowMeConcertsAndFestivalsKey];
+    BOOL food_drinks = [[NSUserDefaults standardUserDefaults] boolForKey:UserDefaultsShowMeFoodAndDrinksKey];
+    BOOL nightlife = [[NSUserDefaults standardUserDefaults] boolForKey:UserDefaultsShowMeNightlifeKey];
+    NSInteger dist = [[NSUserDefaults standardUserDefaults] integerForKey:UserDefaultsSearchWithinKey];
+
+    // create params
+    NSDictionary* params = @{
+        @"remember_token" : token,
+        @"concerts_festivals" : @(concerts_festivals),
+        @"day" : @"4",
+        @"food_drinks" : @(food_drinks),
+        @"nightlife" : @(nightlife),
+        @"lat" : @"33.7691832",
+        @"long" : @"-84.3819832",
+        @"dist" : @(dist),
+        @"days" : @"3",
+        @"time" : @"2015-03-19 23:19:29",
+        @"s" : @"",
+        @"offset" : @"-4"
+    };
+
+    // create failure block
+    CREATE_FAILURE_BLOCK(failureBlock, {
+        // call failure block
+        if (failure) {
+            failure(error);
+        }
+    });
+
+    // create success block
+    CREATE_VERIFYING_SUCCESS_BLOCK(successBlock, failureBlock, {
+        // call success block
+        if (success) {
+            success();
+        }
+    });
+
+    // check if the token is valid
+    [self.manager GET:kLunrAPIEventsURL parameters:params success:successBlock failure:failureBlock];
+}
+
+#pragma mark - Treats
+
+- (void)retrieveTreats
+{
 }
 
 #pragma mark - Helpers
@@ -192,21 +291,17 @@ NSString* const kLunrAPICheckSpecialURL = @"https://www.lunr.me/check_special.js
     return success;
 }
 
-/*
-concerts_festivals = "bars"
-day = wk_day
-food_drinks = "clubs"
-nightlife = "restaurants"
-lat = latitude
-long = longitude
-dist = "distance"
-days = "days" or "time"
-time = getCurrentTime()
-offset = offsetFromUtc
-type = "event_type" ("all")
+- (id)responseObjectForError:(NSError*)error
+{
+    NSURLResponse* response = [error userInfo][AFNetworkingOperationFailingURLResponseErrorKey];
+    NSData* data = [error userInfo][AFNetworkingOperationFailingURLResponseDataErrorKey];
+    NSError* serializationError;
+    id responseObject = [self.manager.responseSerializer responseObjectForResponse:response data:data error:&serializationError];
+    if (serializationError) {
+        NSLog(@"getResponseObjectFromError could not get response object: \n%@", serializationError);
+    }
 
-day = (now_utc.getDayOfWeek()) % 7;
-offset = offsetFromUtc = tz.getOffset(now.getTime()) / (60 * 60 * 1000);
-*/
+    return responseObject;
+}
 
 @end

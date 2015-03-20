@@ -9,12 +9,18 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
+#import "CoreData+MagicalRecord.h"
+
 typedef void (^TableViewCellConfigureBlock)(id cell, id event);
 
-@interface GenericDataSource : NSObject <UITableViewDataSource>
+@interface GenericDataSource : NSObject <UITableViewDataSource, NSFetchedResultsControllerDelegate> {
+    NSFetchedResultsController* _fetchedResultsController;
+}
 
-- (id)initWithCellIdentifier:(NSString*)cellIdentifier configureCellBlock:(TableViewCellConfigureBlock)configureCellBlock;
+@property (strong, nonatomic) UITableView* tableView;
+@property (nonatomic, copy) NSString* cellIdentifier;
+@property (strong, nonatomic) NSFetchedResultsController* fetchedResultsController;
 
-- (id)itemAtIndexPath:(NSIndexPath*)indexPath;
+- (id)initWithTableView:(UITableView*)tableView cellIdentifier:(NSString*)cellIdentifier;
 
 @end

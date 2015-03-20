@@ -106,7 +106,7 @@
         // stop spinner
         [self stopActivityIndicator];
 
-        // user is logged in, dismiss
+        // user is registered in, dismiss
         [self dismissViewControllerAnimated:YES completion:nil];
 
     } failure:^(NSError* error) {
@@ -115,7 +115,7 @@
 
         // alert failure
         [self alertWithTitle:@"Could Not Register"
-                     message:@"Something went wrong.\nPlease try again."];
+                     message:[error localizedDescription]];
 
     }];
 }
