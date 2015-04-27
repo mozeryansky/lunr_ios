@@ -20,7 +20,10 @@ typedef void (^TableViewCellConfigureBlock)(id cell, id event);
 @property (strong, nonatomic) UITableView* tableView;
 @property (nonatomic, copy) NSString* cellIdentifier;
 @property (strong, nonatomic) NSFetchedResultsController* fetchedResultsController;
+@property (nonatomic) BOOL enabled;
 
 - (id)initWithTableView:(UITableView*)tableView cellIdentifier:(NSString*)cellIdentifier;
+- (id)itemAtIndexPath:(NSIndexPath*)indexPath;
+- (void)resetFetchedResultsController;
 
 @end

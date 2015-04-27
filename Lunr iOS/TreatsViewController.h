@@ -8,8 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+#import "TreatsDataSource.h"
+
 @interface TreatsViewController : UIViewController <UITableViewDelegate>
 
+@property (strong, nonatomic) TreatsDataSource* treatsDataSource;
 @property (weak, nonatomic) IBOutlet UITableView* tableView;
+@property (weak, nonatomic) IBOutlet UILabel *backgroundLabel;
+
+- (void)retrieveTreats;
 
 @end

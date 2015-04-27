@@ -23,3 +23,11 @@ NSString* const UserDefaultsShowMeNightlifeKey = @"showMeNightlife";
 //
 
 NSString* const UserDefaultsRememberTokenKey = @"rememberToken";
+
+//
+//  Home
+//
+
+NSString* const UserDefaultsSearchKeywordKey = @"searchKeywordKey";
+NSString* const UserDefaultsHomeSelectedEventTypeKey = @"homeSelectedEventType";
+

@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 
 #import "SelectableButton.h"
 
-@interface SettingsViewController : UIViewController
+@interface SettingsViewController : UIViewController<MFMailComposeViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UISlider* withinSlider;
 @property (weak, nonatomic) IBOutlet UILabel *milesLabel;

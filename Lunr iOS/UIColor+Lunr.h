@@ -12,6 +12,7 @@
 
 // Lunr Colors
 + (UIColor*)lunrPurple;
++ (UIColor*)lunrLighterPurple;
 
 // Event Type
 + (UIColor*)eventTypeNormalColor;

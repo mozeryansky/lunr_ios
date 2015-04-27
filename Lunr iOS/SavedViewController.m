@@ -9,9 +9,12 @@
 #import "SavedViewController.h"
 
 #import "EventTableViewCell.h"
+#import "SavedDataSource.h"
+#import "EventViewController.h"
+#import "Event.h"
 
 @interface SavedViewController ()
-
+@property (strong, nonatomic) SavedDataSource *savedDataSource;
 @end
 
 @implementation SavedViewController
@@ -30,33 +33,13 @@
     self.tableView.delegate = self;
 
     // data source
-    self.tableView.dataSource = self;
+    self.savedDataSource = [[SavedDataSource alloc] initWithTableView:self.tableView cellIdentifier:[EventTableViewCell cellIdentifer]];
+    self.savedDataSource.enabled = YES;
+    self.tableView.dataSource = self.savedDataSource;
 
     // register cell from xib
     static NSString* CellIdentifier = @"EventTableViewCell";
     [self.tableView registerNib:[UINib nibWithNibName:CellIdentifier bundle:[NSBundle mainBundle]] forCellReuseIdentifier:CellIdentifier];
-}
-
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView
-{
-    // Return the number of sections.
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
-    return 5;
-}
-
-- (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
-{
-    static NSString* CellIdentifier = @"EventTableViewCell";
-    EventTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-
-    return cell;
 }
 
 #pragma mark - Table View Delegate
@@ -71,8 +54,16 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if([[segue identifier] isEqualToString:@"showEventSegue"]){
+        // prepare to show event
+        // get event
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        Event *event = [self.savedDataSource itemAtIndexPath:indexPath];
+
+        // set event
+        EventViewController *eventVC = [segue destinationViewController];
+        [eventVC setEvent:event];
+    }
 }
 
 @end

@@ -13,6 +13,8 @@
 #import "UIColor+Lunr.h"
 #import "UserDefaults.h"
 #import "LunrAPI.h"
+#import "Event.h"
+#import "Treat.h"
 
 @interface AppDelegate ()
 
@@ -22,11 +24,18 @@
 
 - (BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
 {
-    //Setup MagicalRecord
-    [MagicalRecord setupCoreDataStackWithStoreNamed:@"lunr"];
+    // Setup MagicalRecord
+    [MagicalRecord setupCoreDataStack];
+
+    /*
+    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext* localContext) {
+        [Event MR_truncateAll];
+        [Treat MR_truncateAll];
+    }];
+    */
 
     // AFNetworking Logging
-    [[AFNetworkActivityLogger sharedLogger] startLogging];
+    //[[AFNetworkActivityLogger sharedLogger] startLogging];
     //[[AFNetworkActivityLogger sharedLogger] setLevel:AFLoggerLevelDebug];
 
     // Appearance
@@ -74,6 +83,7 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
+    [MagicalRecord cleanUp];
 }
 
 #pragma mark - User Defaults
@@ -90,7 +100,10 @@
         UserDefaultsShowMeFoodAndDrinksKey : @YES,
         UserDefaultsShowMeNightlifeKey : @YES,
         // Login
-        UserDefaultsRememberTokenKey : @""
+        UserDefaultsRememberTokenKey : @"",
+        // Home
+        UserDefaultsSearchKeywordKey : @"",
+        UserDefaultsHomeSelectedEventTypeKey : @(EventTypeArtsAndEntertainment)
     };
 
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];

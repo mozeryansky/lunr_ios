@@ -37,20 +37,24 @@
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
 
+    [self verifyToken];
+}
+
+- (void)verifyToken
+{
     // verify token
     [[LunrAPI sharedInstance] verifyTokenSuccess:^{
         // do nothing, continue
 
     } failure:^(NSError* error) {
+        // failure
+        // logout
+        [[LunrAPI sharedInstance] logout];
+
         // goto login view
         [self performSegueWithIdentifier:@"presentLoginSegue" sender:self];
     }];

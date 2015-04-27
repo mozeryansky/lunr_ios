@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Lunr. All rights reserved.
 //
 
-#import "SettingsViewController.h"
 
+#import "SettingsViewController.h"
 #import "UserDefaults.h"
 #import "LunrAPI.h"
 
@@ -155,6 +155,22 @@
 
 - (IBAction)contactUsButtonPressed:(id)sender
 {
+    NSString *email = @"support@lunr.me";
+
+    MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
+    controller.mailComposeDelegate = self;
+    [controller setToRecipients:@[email]];
+    [controller setSubject:@"Hello Lunr!"];
+    if (controller){
+        [self presentViewController:controller animated:YES completion:nil];
+    }
+}
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError*)error;
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)logoutButtonPressed:(id)sender

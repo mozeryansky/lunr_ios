@@ -12,8 +12,9 @@
 #import "EventTableViewCell.h"
 #import "UIBarButtonItem+Buttons.h"
 #import "UIColor+Lunr.h"
-#import "EventsDataSource.h"
 #import "LunrAPI.h"
+#import "EventViewController.h"
+#import "UserDefaults.h"
 
 typedef NS_ENUM(NSInteger, ToolbarMoveDirection) {
     ToolbarMoveDirectionDown = 1,
@@ -21,11 +22,11 @@ typedef NS_ENUM(NSInteger, ToolbarMoveDirection) {
 };
 
 @interface MainViewController ()
-@property (strong, nonatomic) EventsDataSource* eventsDataSource;
 @property (strong, nonatomic) UIBarButtonItem* selectedEventTypeButton;
 @property (nonatomic, getter=isToolbarHidden) BOOL toolbarHidden;
 @property (nonatomic) dispatch_queue_t toolbarQueue;
 @property (nonatomic) CGPoint previousScrollTranslation;
+@property (nonatomic) BOOL viewDidAppearFromPop;
 @end
 
 @implementation MainViewController
@@ -39,10 +40,15 @@ typedef NS_ENUM(NSInteger, ToolbarMoveDirection) {
 
     // setup table
     [self setupTable];
+
+    self.viewDidAppearFromPop = NO;
 }
 
 - (void)setupToolbar
 {
+    // toolbar show/hide queue
+    self.toolbarQueue = dispatch_queue_create("MainViewControllerToolbarQueue", DISPATCH_QUEUE_SERIAL);
+
     // setup toolbar item
     [self.toolbar setItems:@[
         [UIBarButtonItem flexibleSpace],
@@ -63,13 +69,39 @@ typedef NS_ENUM(NSInteger, ToolbarMoveDirection) {
     ]];
 
     // select first item
-    [self setSelectedEventTypeButton:self.toolbar.items[1]];
+    [self selectEventType];
 
     // set not hidden
-    self.toolbarHidden = NO;
+    [self showToolbar];
+}
 
-    // toolbar show/hide queue
-    self.toolbarQueue = dispatch_queue_create("MainViewControllerToolbarQueue", DISPATCH_QUEUE_SERIAL);
+- (void)selectEventType
+{
+    NSNumber* eventTypeNum = [[NSUserDefaults standardUserDefaults] objectForKey:UserDefaultsHomeSelectedEventTypeKey];
+    EventType eventType = [eventTypeNum integerValue];
+
+    UIBarButtonItem* selectedButton;
+
+    switch (eventType) {
+    default:
+    case EventTypeArtsAndEntertainment:
+        selectedButton = self.toolbar.items[1];
+        break;
+
+    case EventTypeFoodAndDrink:
+        selectedButton = self.toolbar.items[5];
+        break;
+
+    case EventTypeNightLife:
+        selectedButton = self.toolbar.items[9];
+        break;
+
+    case EventTypeOther:
+        selectedButton = self.toolbar.items[13];
+        break;
+    }
+
+    [self setSelectedEventTypeButton:selectedButton];
 }
 
 - (void)setupTable
@@ -78,11 +110,14 @@ typedef NS_ENUM(NSInteger, ToolbarMoveDirection) {
     self.tableView.delegate = self;
 
     // data source
-    self.eventsDataSource = [[EventsDataSource alloc] initWithTableView:self.tableView cellIdentifier:[EventTableViewCell cellIdentifer]];
+    self.eventsDataSource = [[EventsDataSource alloc] initWithTableView:self.tableView
+                                                         cellIdentifier:[EventTableViewCell cellIdentifer]];
+    self.eventsDataSource.enabled = NO;
     self.tableView.dataSource = self.eventsDataSource;
 
     // register cell from xib
-    [self.tableView registerNib:[UINib nibWithNibName:[EventTableViewCell cellIdentifer] bundle:[NSBundle mainBundle]] forCellReuseIdentifier:[EventTableViewCell cellIdentifer]];
+    [self.tableView registerNib:[UINib nibWithNibName:[EventTableViewCell cellIdentifer] bundle:[NSBundle mainBundle]]
+         forCellReuseIdentifier:[EventTableViewCell cellIdentifer]];
 
     // set content inset to acount for the toolbar
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, CGRectGetHeight(self.toolbar.frame), 0);
@@ -98,8 +133,37 @@ typedef NS_ENUM(NSInteger, ToolbarMoveDirection) {
     // deselect any selected rows
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
 
+    if(!self.viewDidAppearFromPop){
+        [self retrieveEvents];
+        self.viewDidAppearFromPop = NO;
+    }
+}
+
+- (void)retrieveEvents
+{
+    // make sure all retrive changes happen at the same time
+    [self.eventsDataSource setEnabled:NO];
+    [self.tableView reloadData];
+
+    [self.backgroundLabel setText:@"Loading Events..."];
+    [self.backgroundLabel setHidden:NO];
+
     // fetch data
-    [[LunrAPI sharedInstance] retrieveEvents];
+    [[LunrAPI sharedInstance] retrieveEventsSuccess:^{
+        // success
+        // NSLog(@"retrieveEventsSuccess: retrieved");
+
+        [self.eventsDataSource setEnabled:YES];
+        [self.eventsDataSource resetFetchedResultsController];
+        [self.tableView reloadData];
+
+        [self.backgroundLabel setHidden:YES];
+
+    } failure:^(NSError* error) {
+        // error
+        NSLog(@"retrieveEventsSuccess: failure!");
+        [self.backgroundLabel setText:@"Could Not Load Events"];
+    }];
 }
 
 #pragma mark - Properties
@@ -116,13 +180,6 @@ typedef NS_ENUM(NSInteger, ToolbarMoveDirection) {
     [self.selectedEventTypeButton setTintColor:[UIColor eventTypeSelectedColor]];
 }
 
-#pragma mark - Search
-
-- (void)beginSearch
-{
-    // set focus on search controller
-}
-
 #pragma mark - Table View Delegate
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
@@ -135,8 +192,18 @@ typedef NS_ENUM(NSInteger, ToolbarMoveDirection) {
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"showEventSegue"]) {
+        // prepare to show event
+        // get event
+        NSIndexPath* indexPath = [self.tableView indexPathForSelectedRow];
+        Event* event = [self.eventsDataSource itemAtIndexPath:indexPath];
+
+        // set event
+        EventViewController* eventVC = [segue destinationViewController];
+        [eventVC setEvent:event];
+
+        self.viewDidAppearFromPop = YES;
+    }
 }
 
 #pragma mark - Pan Gesture
@@ -202,10 +269,14 @@ typedef NS_ENUM(NSInteger, ToolbarMoveDirection) {
 - (void)moveToolbarInDirection:(ToolbarMoveDirection)direction completion:(void (^)(BOOL finished))completion
 {
     // move views
-    [UIView animateWithDuration:0.4 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+    [UIView animateWithDuration:0.4 delay:0.0 options:UIViewAnimationOptionLayoutSubviews animations:^{
         // hide all the attached views by moving them down
         CGRect frame = self.toolbar.frame;
-        frame.origin.y += direction * CGRectGetHeight(self.toolbar.frame);
+        if(direction == ToolbarMoveDirectionUp){
+            frame.origin.y = CGRectGetHeight(self.tableView.frame) - CGRectGetHeight(self.toolbar.frame);
+        } else {
+            frame.origin.y = CGRectGetHeight(self.tableView.frame);
+        }
         self.toolbar.frame = frame;
 
     } completion:completion];
@@ -215,6 +286,15 @@ typedef NS_ENUM(NSInteger, ToolbarMoveDirection) {
 
 - (void)eventTypeButtonPressed:(UIBarButtonItem*)button
 {
+    // save the choice
+    EventType eventType = button.tag;
+    [[NSUserDefaults standardUserDefaults] setObject:@(eventType) forKey:UserDefaultsHomeSelectedEventTypeKey];
+
+    // reset the data source
+    [self.eventsDataSource resetFetchedResultsController];
+    [self retrieveEvents];
+
+    // change the selection
     [self setSelectedEventTypeButton:button];
 }
 

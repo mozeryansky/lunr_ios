@@ -29,3 +29,10 @@ extern NSString* const UserDefaultsShowMeNightlifeKey;
 //
 
 extern NSString* const UserDefaultsRememberTokenKey;
+
+//
+//  Home
+//
+
+extern NSString* const UserDefaultsSearchKeywordKey;
+extern NSString* const UserDefaultsHomeSelectedEventTypeKey;

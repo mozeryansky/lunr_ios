@@ -8,20 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger, EventType) {
-    EventTypeArtsAndEntertainment = 1,
-    EventTypeFoodAndDrink,
-    EventTypeNightLife,
-    EventTypeOther
-};
+#import "EventsDataSource.h"
 
 @interface MainViewController : UIViewController <UITableViewDelegate>
 
+@property (strong, nonatomic) EventsDataSource* eventsDataSource;
 @property (weak, nonatomic) IBOutlet UIToolbar* toolbar;
 @property (weak, nonatomic) IBOutlet UITableView* tableView;
+@property (weak, nonatomic) IBOutlet UILabel *backgroundLabel;
 
-- (void)beginSearch;
-
+- (void)retrieveEvents;
 - (IBAction)handlePan:(UIPanGestureRecognizer *)sender;
 
 @end

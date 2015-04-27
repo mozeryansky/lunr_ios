@@ -17,6 +17,12 @@
     return [UIColor colorWithRed:0.396 green:0.325 blue:0.498 alpha:1.000];
 }
 
++ (UIColor*)lunrLighterPurple
+{
+    return [UIColor colorWithRed:0.456 green:0.375 blue:0.582 alpha:1.000];
+}
+
+
 // event type
 
 + (UIColor*)eventTypeNormalColor;

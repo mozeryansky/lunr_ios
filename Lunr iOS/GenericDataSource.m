@@ -20,7 +20,8 @@
     if (self) {
         self.tableView = tableView;
         self.cellIdentifier = cellIdentifier;
-
+        self.enabled = YES;
+        
         // clear cache on init
         [self clearCache];
     }
@@ -29,7 +30,9 @@
 
 - (id)itemAtIndexPath:(NSIndexPath*)indexPath
 {
-    return nil;
+    id item = [self.fetchedResultsController objectAtIndexPath:indexPath];
+
+    return item;
 }
 
 #pragma mark - UITableViewDataSource
@@ -56,7 +59,7 @@
 
 - (void)configureCell:(UITableViewCell*)cell atIndexPath:(NSIndexPath*)indexPath
 {
-    id item = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    id item = [self itemAtIndexPath:indexPath];
 
     [self configureCell:cell withItem:item];
 }
@@ -85,6 +88,20 @@
     @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                    reason:[NSString stringWithFormat:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)]
                                  userInfo:nil];
+}
+
+- (void)resetFetchedResultsController
+{
+    _fetchedResultsController = nil;
+}
+
+- (void)setEnabled:(BOOL)enabled
+{
+    if (!enabled) {
+        [self resetFetchedResultsController];
+    }
+
+    _enabled = enabled;
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate
@@ -125,21 +142,25 @@
 
     switch (type) {
     case NSFetchedResultsChangeInsert:
+        //NSLog(@"insert");
         [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
-                             withRowAnimation:UITableViewRowAnimationNone];
+                         withRowAnimation:UITableViewRowAnimationNone];
         break;
 
     case NSFetchedResultsChangeDelete:
+        //NSLog(@"delete");
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                          withRowAnimation:UITableViewRowAnimationNone];
         break;
 
     case NSFetchedResultsChangeUpdate:
+        //NSLog(@"update");
         [self configureCell:[tableView cellForRowAtIndexPath:indexPath]
                 atIndexPath:indexPath];
         break;
 
     case NSFetchedResultsChangeMove:
+        //NSLog(@"move");
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                          withRowAnimation:UITableViewRowAnimationNone];
         [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]

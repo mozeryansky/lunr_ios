@@ -4,8 +4,25 @@
 #import "_Event.h"
 
 const struct EventAttributes EventAttributes = {
+	.address = @"address",
+	.avatarUrlMedium = @"avatarUrlMedium",
+	.avatarUrlSquare = @"avatarUrlSquare",
+	.avatarUrlThumb = @"avatarUrlThumb",
+	.categoryText = @"categoryText",
+	.descriptionText = @"descriptionText",
+	.endTimeUTC = @"endTimeUTC",
+	.eventLink = @"eventLink",
 	.id = @"id",
+	.latitude = @"latitude",
+	.longitude = @"longitude",
+	.name = @"name",
+	.place = @"place",
+	.priceRange = @"priceRange",
+	.reviews = @"reviews",
 	.saved = @"saved",
+	.startTimeUTC = @"startTimeUTC",
+	.tags = @"tags",
+	.visible = @"visible",
 };
 
 @implementation EventID
@@ -39,14 +56,45 @@ const struct EventAttributes EventAttributes = {
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
+	if ([key isEqualToString:@"latitudeValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"latitude"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
+	if ([key isEqualToString:@"longitudeValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"longitude"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 	if ([key isEqualToString:@"savedValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"saved"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
+	if ([key isEqualToString:@"visibleValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"visible"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
 
 	return keyPaths;
 }
+
+@dynamic address;
+
+@dynamic avatarUrlMedium;
+
+@dynamic avatarUrlSquare;
+
+@dynamic avatarUrlThumb;
+
+@dynamic categoryText;
+
+@dynamic descriptionText;
+
+@dynamic endTimeUTC;
+
+@dynamic eventLink;
 
 @dynamic id;
 
@@ -56,7 +104,7 @@ const struct EventAttributes EventAttributes = {
 }
 
 - (void)setIdValue:(int64_t)value_ {
-	[self setId:[NSNumber numberWithLongLong:value_]];
+	[self setId:@(value_)];
 }
 
 - (int64_t)primitiveIdValue {
@@ -65,8 +113,56 @@ const struct EventAttributes EventAttributes = {
 }
 
 - (void)setPrimitiveIdValue:(int64_t)value_ {
-	[self setPrimitiveId:[NSNumber numberWithLongLong:value_]];
+	[self setPrimitiveId:@(value_)];
 }
+
+@dynamic latitude;
+
+- (double)latitudeValue {
+	NSNumber *result = [self latitude];
+	return [result doubleValue];
+}
+
+- (void)setLatitudeValue:(double)value_ {
+	[self setLatitude:@(value_)];
+}
+
+- (double)primitiveLatitudeValue {
+	NSNumber *result = [self primitiveLatitude];
+	return [result doubleValue];
+}
+
+- (void)setPrimitiveLatitudeValue:(double)value_ {
+	[self setPrimitiveLatitude:@(value_)];
+}
+
+@dynamic longitude;
+
+- (double)longitudeValue {
+	NSNumber *result = [self longitude];
+	return [result doubleValue];
+}
+
+- (void)setLongitudeValue:(double)value_ {
+	[self setLongitude:@(value_)];
+}
+
+- (double)primitiveLongitudeValue {
+	NSNumber *result = [self primitiveLongitude];
+	return [result doubleValue];
+}
+
+- (void)setPrimitiveLongitudeValue:(double)value_ {
+	[self setPrimitiveLongitude:@(value_)];
+}
+
+@dynamic name;
+
+@dynamic place;
+
+@dynamic priceRange;
+
+@dynamic reviews;
 
 @dynamic saved;
 
@@ -76,7 +172,7 @@ const struct EventAttributes EventAttributes = {
 }
 
 - (void)setSavedValue:(BOOL)value_ {
-	[self setSaved:[NSNumber numberWithBool:value_]];
+	[self setSaved:@(value_)];
 }
 
 - (BOOL)primitiveSavedValue {
@@ -85,7 +181,31 @@ const struct EventAttributes EventAttributes = {
 }
 
 - (void)setPrimitiveSavedValue:(BOOL)value_ {
-	[self setPrimitiveSaved:[NSNumber numberWithBool:value_]];
+	[self setPrimitiveSaved:@(value_)];
+}
+
+@dynamic startTimeUTC;
+
+@dynamic tags;
+
+@dynamic visible;
+
+- (BOOL)visibleValue {
+	NSNumber *result = [self visible];
+	return [result boolValue];
+}
+
+- (void)setVisibleValue:(BOOL)value_ {
+	[self setVisible:@(value_)];
+}
+
+- (BOOL)primitiveVisibleValue {
+	NSNumber *result = [self primitiveVisible];
+	return [result boolValue];
+}
+
+- (void)setPrimitiveVisibleValue:(BOOL)value_ {
+	[self setPrimitiveVisible:@(value_)];
 }
 
 @end

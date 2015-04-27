@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NavigationTabController : UINavigationController <UINavigationControllerDelegate>
+@interface NavigationTabController : UINavigationController <UITextFieldDelegate, UINavigationControllerDelegate>
+
+@property (strong, nonatomic) UIImageView* navigationIcon;
+@property (strong, nonatomic) UIButton* navigationSearchButton;
+@property (strong, nonatomic) UITextField* searchTextField;
 
 @end

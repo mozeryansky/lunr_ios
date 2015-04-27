@@ -9,9 +9,7 @@
 #import <Foundation/Foundation.h>
 
 extern NSString* const kLunrAPIEventsURL;
-extern NSString* const kLunrAPIEeventURL;
-extern NSString* const kLunrAPIPPlacesURL;
-extern NSString* const kLunrAPIPlaceURL;
+extern NSString* const kLunrAPIEventURL;
 extern NSString* const kLunrAPISpecialsURL;
 extern NSString* const kLunrAPISpecialURL;
 extern NSString* const kLunrAPICheckURL;
@@ -25,7 +23,7 @@ extern NSString* const kLunrAPICheckURL;
 - (void)verifyTokenSuccess:(void (^)())success failure:(void (^)(NSError* error))failure;
 - (void)logout;
 
-- (void)retrieveEvents;
-- (void)retrieveTreats;
+- (void)retrieveEventsSuccess:(void (^)())success failure:(void (^)(NSError* error))failure;
+- (void)retrieveTreatsSuccess:(void (^)())success failure:(void (^)(NSError* error))failure;
 
 @end
